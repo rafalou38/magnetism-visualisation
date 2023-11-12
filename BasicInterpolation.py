@@ -7,7 +7,6 @@ import pandas as pd
 
 # Chargement des données
 df = pd.read_csv('data.csv')
-minV, maxV = -3,3
 maxX,maxY = 0,0
 for i in range(len(df)):
     if df['x'][i] > maxX:
@@ -18,7 +17,7 @@ for i in range(len(df)):
 # Mise en forme dans un tableau 
 grid = np.random.rand(maxX+1,maxY+1)
 for i in range(len(df)):
-    grid[df['x'][i]][df['y'][i]] = (df['v'][i] - minV) / (maxV - minV)
+    grid[df['x'][i]][df['y'][i]] = df['v'][i]
     if df['x'][i] > maxX:
         maxX = df['x'][i]
     if df['y'][i] > maxY:
