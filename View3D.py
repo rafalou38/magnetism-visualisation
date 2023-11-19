@@ -2,12 +2,11 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
 from scipy.interpolate import griddata
-
 import DataLoading as DL
 
 INTERPOLATION_FACTOR = 10
 
-grid = DL.loadData("data.csv")
+grid,minV,maxV, res = DL.loadData("data.csv")
 
 # Interpolation
 x, y = np.meshgrid(np.arange(grid.shape[1]), np.arange(grid.shape[0]))
@@ -26,9 +25,12 @@ plt.tight_layout()
 surf = ax.plot_surface(xi, yi, zi, cmap="coolwarm",
                        linewidth=0, antialiased=False)
 
-ax.set_zlim(-5, 5)
+ax.xaxis._set_scale("function", functions=[lambda x: x * (2.3/1.5), lambda x: x / (2.3/1.5)])
+
+# ax.set_zlim(-5, 5)
 # Précisions axe z
 ax.zaxis.set_major_formatter('{x:.02f}')
+# ax.set_yscale("function", functions=[lambda x: x * (2.3/1.5), lambda x: x / (2.3/1.5)])
 
 fig.colorbar(surf, shrink=0.5, aspect=5)
 

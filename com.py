@@ -14,18 +14,17 @@ while True:
     line = ser.readline()
     print(line)
 
-    if(line == "START\n"):
+    if("START" in line):
         if(file != None):
             file.close()
         path = f"data-{time.time()}.csv"
         file = open(path, "w")
         print(path, "created")
-        
-    elif (line == "END\n"):
-        break
+    elif ("END" in line):
+        print("done")
+        file.close()
+        # break
     else:
         file.write(line)
 
 ser.close()             # close port
-if(file != None):
-    file.close()
