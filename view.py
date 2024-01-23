@@ -111,6 +111,24 @@ def viewData(file, withModel=True, withFFT=True):
     plt.savefig(file + ".png", dpi=200)
     plt.show()
 
+def viewDataAmplitude(file, withModel=True, withFFT=True):
+    # Data: t,a
+    df = pd.read_csv(file + ".amplitude.csv", nrows=600)
+
+
+    plt.figure(figsize=(12.5, 5))
+    plt.scatter(df["t"], df["a"], linewidth=1, s=4, marker="x")
+
+
+    plt.title("Y en fonction de t")
+
+    plt.xlabel("t (s)")
+    plt.ylabel("a")
+
+    plt.tight_layout()
+    plt.savefig(file + ".png", dpi=200)
+    plt.show()
+
 
 if __name__ == "__main__":
     viewData("18-nov/Sans nom 1.avi")
